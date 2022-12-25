@@ -2,10 +2,10 @@ name: Ubuntu - Test
  
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
 # The branches below must be a subset of the branches above
-    branches: [ master ]
+    branches: [ main ]
 #  schedule:
 #    - cron: '15 */12 * * *'
 
@@ -30,4 +30,4 @@ jobs:
         continue-on-error: true
         run: mvn test
         #env:
-          #BASE_URL: https://www.google.com/?hl=en
+          #BASE_URL: https://www.google.com/

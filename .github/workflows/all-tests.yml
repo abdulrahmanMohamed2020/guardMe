@@ -64,7 +64,7 @@ jobs:
         uses: Sibz/github-status-action@v1
         with: 
           authToken: ${{secrets.GITHUB_TOKEN}}
-          context: 'Test report'
+          context: 'Test Summary Report'
           #state: 'success'
           sha: ${{github.event.pull_request.head.sha || github.sha}}
           target_url:  https://abdulrahmanmohamed2020.github.io/guardMe/${{ github.run_number }}

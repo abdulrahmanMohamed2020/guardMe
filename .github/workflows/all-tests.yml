@@ -30,4 +30,4 @@ jobs:
         continue-on-error: true
         run: mvn test
         #env:
-          #BASE_URL: https://www.google.com/?hl=en
+          #BASE_URL: https://www.google.com/

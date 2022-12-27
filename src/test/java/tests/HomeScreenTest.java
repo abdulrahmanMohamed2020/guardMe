@@ -69,7 +69,7 @@ public class HomeScreenTest extends LoggedInUserBaseTest{
             throw new RuntimeException(e);
         }
 
-        assertEquals(getDriver().getCurrentUrl(),"https://school.guardme.247demo.ca/company-user-account");
+        assertEquals(getDriver().getCurrentUrl(),"https://school.guardme.247demo.ca/profile?tab=manage-users");
     }
 
     @Test(description = "Verify the user is redirected to the Guard.me Documents page when clicking on Guard.me Documents button")
@@ -99,7 +99,7 @@ public class HomeScreenTest extends LoggedInUserBaseTest{
             throw new RuntimeException(e);
         }
 
-        assertEquals(getDriver().getCurrentUrl(),"https://school.guardme.247demo.ca/company-user-account");
+        assertEquals(getDriver().getCurrentUrl(),"https://school.guardme.247demo.ca/profile?tab=account-details");
     }
 
     @Test(description = "Verify that the page Logo is displayed at the page corner")

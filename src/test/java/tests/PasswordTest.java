@@ -1,11 +1,13 @@
 package tests;
 
+import org.labs247.pages.home.HomeScreenPage;
 import org.labs247.pages.onboarding.PasswordPage;
 import org.testng.annotations.Test;
 import uitils.Constants;
 import uitils.LoginHelper;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class PasswordTest extends BaseTest{
 
@@ -21,12 +23,7 @@ public class PasswordTest extends BaseTest{
         passwordPage.enterPassword(Constants.CORRECT_PASSWORD);
         passwordPage.clickOnContinue();
 
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
+        assertTrue(new HomeScreenPage(getDriver()).isSalutationMessageVisible(),"The Salutation Message is not visible");
         assertEquals(getDriver().getCurrentUrl(),"https://school.guardme.247demo.ca/home");
     }
 
@@ -66,7 +63,7 @@ public class PasswordTest extends BaseTest{
         passwordPage.enterPassword(Constants.INCORRECT_PASSWORD);
         passwordPage.clickOnContinue();
 
-        assertEquals(passwordPage.getErrorMessage(), "The provided password is invalid.");
+        assertEquals(passwordPage.getErrorMessage(), "The provided password is invalid.","The error message is incorrect or not displayed");
     }
 
     @Test(description = "Verify the user can show the password")

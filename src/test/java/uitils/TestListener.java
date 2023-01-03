@@ -41,7 +41,7 @@ public class TestListener extends BaseTest implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         TestListener.takeScreenShotForAllure(getDriver());
-        TestListener.saveScreenShot(getDriver(),result);
+        //TestListener.saveScreenShot(getDriver(),result);
         TestListener.saveTextLog(result.getMethod().getMethodName() + " failed and screenshot taken.");
     }
 }

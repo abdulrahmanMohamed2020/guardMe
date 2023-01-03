@@ -10,13 +10,13 @@ import java.util.List;
 public class BasePage {
 
     protected WebDriver driver;
-    private WebDriverWait wait;
+    private WebDriverWait driverWait;
     private static final Duration TIMEOUT = Duration.ofSeconds(30);
     private static final Duration POLLING_TIMEOUT = Duration.ofMillis(200);
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, TIMEOUT);
+        driverWait = new WebDriverWait(driver, TIMEOUT);
     }
 
     protected WebElement findElement(By locator) {
@@ -63,10 +63,10 @@ public class BasePage {
 
     public void actionClick(By locator) {
         WebElement element = findElement(locator);
-        _scrollToElement(element);
+        scrollToElement(element);
 
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-        wait.until(ExpectedConditions.visibilityOf(element));
+        driverWait.until(ExpectedConditions.elementToBeClickable(element));
+        driverWait.until(ExpectedConditions.visibilityOf(element));
         try {
             element.click();
         } catch (StaleElementReferenceException ex) {
@@ -76,9 +76,9 @@ public class BasePage {
 
     public void typeText(By locator, String text) {
         WebElement element = findElement(locator);
-        _scrollToElement(element);
+        scrollToElement(element);
 
-        wait.until(ExpectedConditions.visibilityOf(element));
+        driverWait.until(ExpectedConditions.visibilityOf(element));
         try {
             element.clear();
             element.sendKeys(text);
@@ -92,7 +92,7 @@ public class BasePage {
         select.selectByVisibleText(item);
     }
 
-    private void _scrollToElement(WebElement element) {
+    private void scrollToElement(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 
         Actions actions = new Actions(driver);

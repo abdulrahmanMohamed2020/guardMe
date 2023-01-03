@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 public class HomeScreenPage extends BasePage {
 
-    private final By homeScreenTitle = By.xpath("//h1[contains(text(),'Good morning, School Owner')]");
+    private final By salutationMessage = By.xpath("//h1[contains(text(),'Good morning, ')]");
     private final By orderPoliciesButton = By.xpath("//h3[contains(text(),'Order Policies')]//parent::div");
     private final By managePoliciesButton = By.xpath("//h3[contains(text(),'Manage Policies')]//parent::div");
     private final By invoicesPaymentsButton = By.xpath("//h3[contains(text(),'Invoices/Payments')]//parent::div");
@@ -21,13 +21,13 @@ public class HomeScreenPage extends BasePage {
     private final By logo = By.xpath("//parent::a//img");
     private final By notificationIcon = By.xpath("//parent::button[contains(@role,'button')]//parent::span//i");
     private final By hamburgerIcon = By.xpath("//parent::button[not(contains(@role,'button'))]//parent::span//i");
-    private final By campus = By.xpath("//span[contains(text(),'Castle Park School')]");
+    private final By campus = By.xpath("//div[@class='nav-campus-selection']//parent::div//span");
 
     public HomeScreenPage(WebDriver driver) {
         super(driver);
     }
-    public String getHomeScreenTitle() {
-        return findElement(homeScreenTitle).getText();
+    public String getSalutationMessage() {
+        return findElement(salutationMessage).getText();
     }
 
     @Step("Click on the Order Policies button")
@@ -81,6 +81,10 @@ public class HomeScreenPage extends BasePage {
 
     public boolean isLogoVisible() {
         return elementVisible(logo);
+    }
+
+    public boolean isSalutationMessageVisible() {
+        return elementVisible(salutationMessage);
     }
 
     public boolean isNotificationsIconVisible() {

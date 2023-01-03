@@ -57,7 +57,7 @@ public class VerifyPinTest extends BaseTest{
         verifyPinPage.enterSixPinCode(Constants.INCORRECT_PIN_CODE);
         verifyPinPage.clickOnVerifyPinButton();
 
-        assertEquals(verifyPinPage.getErrorMessage(),"Entered pin is incorrect.");
+        assertEquals(verifyPinPage.getErrorMessage(),"Entered pin is incorrect.", "The error message is incorrect or not displayed");
     }
 
     @Test(description = "Verify that the resend pin button is clickable")

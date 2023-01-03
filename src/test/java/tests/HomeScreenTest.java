@@ -1,6 +1,10 @@
 package tests;
 
+import org.labs247.pages.DocumentsPage;
 import org.labs247.pages.home.HomeScreenPage;
+import org.labs247.pages.invoices.InvoicePaymentsPage;
+import org.labs247.pages.users.AccountSettingsPage;
+import org.labs247.pages.users.ManageUsersPage;
 import org.testng.annotations.Test;
 import uitils.Constants;
 
@@ -15,6 +19,7 @@ public class HomeScreenTest extends LoggedInUserBaseTest{
     public void verifyHomePageUrl(){
         homeScreenPage = new HomeScreenPage(getDriver());
 
+        assertTrue(homeScreenPage.isSalutationMessageVisible(),"The Salutation Message is not visible");
         assertEquals(getDriver().getCurrentUrl(),"https://school.guardme.247demo.ca/home");
     }
 
@@ -22,7 +27,7 @@ public class HomeScreenTest extends LoggedInUserBaseTest{
     public void verifyNameOfUser(){
         homeScreenPage = new HomeScreenPage(getDriver());
 
-        assertTrue(homeScreenPage.getHomeScreenTitle().contains("School Owner"),"The name of the user is not displayed");
+        assertTrue(homeScreenPage.getSalutationMessage().contains("School Owner"),"The name of the user is not displayed");
     }
 
     @Test(description = "Verify that the New Policy Menu is shown when clicking on Order Policies button")
@@ -48,13 +53,9 @@ public class HomeScreenTest extends LoggedInUserBaseTest{
         homeScreenPage = new HomeScreenPage(getDriver());
 
         homeScreenPage.clickOnInvoicesAndPayments();
+        InvoicePaymentsPage invoicePaymentsPage = new InvoicePaymentsPage(getDriver());
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
+        assertTrue(invoicePaymentsPage.isInvoiceTitleVisible(),"The Title is not visible");
         assertEquals(getDriver().getCurrentUrl(),"https://school.guardme.247demo.ca/invoice-payments");
     }
 
@@ -64,12 +65,9 @@ public class HomeScreenTest extends LoggedInUserBaseTest{
 
         homeScreenPage.clickOnManageUsers();
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        ManageUsersPage manageUsersPage = new ManageUsersPage(getDriver());
 
+        assertTrue(manageUsersPage.isUsersPageTitleVisible(),"The Title is not visible");
         assertEquals(getDriver().getCurrentUrl(),"https://school.guardme.247demo.ca/profile?tab=manage-users");
     }
 
@@ -78,13 +76,9 @@ public class HomeScreenTest extends LoggedInUserBaseTest{
         homeScreenPage = new HomeScreenPage(getDriver());
 
         homeScreenPage.clickOnMyGuardMeDocuments();
+        DocumentsPage documentsPage = new DocumentsPage(getDriver());
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
+        assertTrue(documentsPage.isDocumentsTitleVisible(),"The Title is not visible");
         assertEquals(getDriver().getCurrentUrl(),"https://school.guardme.247demo.ca/documents");
     }
 
@@ -93,13 +87,9 @@ public class HomeScreenTest extends LoggedInUserBaseTest{
         homeScreenPage = new HomeScreenPage(getDriver());
 
         homeScreenPage.clickOnAccountSettings();
+        AccountSettingsPage accountSettingsPage = new AccountSettingsPage(getDriver());
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
+        assertTrue(accountSettingsPage.isAccountDetailsTitleVisible(),"The Title is not visible");
         assertEquals(getDriver().getCurrentUrl(),"https://school.guardme.247demo.ca/profile?tab=account-details");
     }
 
@@ -115,7 +105,7 @@ public class HomeScreenTest extends LoggedInUserBaseTest{
         homeScreenPage = new HomeScreenPage(getDriver());
 
         assertTrue(homeScreenPage.isCampusVisible(),"The Campus Name is not visible");
-        assertEquals(homeScreenPage.getCampusName(),"Castle Park School", "The Campus Name is not correct");
+        assertEquals(homeScreenPage.getCampusName(),"Westminster School", "The Campus Name is not correct");
     }
 
     @Test(description = "Verify that the Hamburger Icon is displayed and clickable at the page corner")

@@ -2,6 +2,7 @@ package tests;
 
 import org.labs247.pages.home.HomeScreenPage;
 import org.testng.annotations.Test;
+import uitils.Constants;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;

@@ -19,6 +19,7 @@ public class LoginPage extends BasePage {
     public void enterEmail(String email) {
         typeText(emailEle,email);
     }
+
     @Step("Click on the continue button")
     public void clickOnContinue() {
         actionClick(continueButton);

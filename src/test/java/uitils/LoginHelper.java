@@ -6,7 +6,6 @@ import io.restassured.response.Response;
 import org.labs247.pages.onboarding.LoginPage;
 import org.labs247.pages.onboarding.VerifyPinPage;
 import org.openqa.selenium.WebDriver;
-import tests.Constants;
 
 import java.util.HashMap;
 import java.util.Map;

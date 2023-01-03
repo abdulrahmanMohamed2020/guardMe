@@ -2,6 +2,7 @@ package tests;
 
 import org.labs247.pages.onboarding.PasswordPage;
 import org.testng.annotations.Test;
+import uitils.Constants;
 import uitils.LoginHelper;
 
 import static org.testng.Assert.assertEquals;

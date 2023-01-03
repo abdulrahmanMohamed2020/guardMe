@@ -5,6 +5,7 @@ import static org.testng.Assert.*;
 
 import org.labs247.pages.onboarding.VerifyPinPage;
 import org.testng.annotations.Test;
+import uitils.Constants;
 
 public class LoginTest extends BaseTest{
 

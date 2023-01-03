@@ -1,4 +1,4 @@
-package tests;
+package uitils;
 
 public class Constants {
     public static String VALID_EMAIL = "school@guardme.test";

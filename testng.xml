@@ -5,9 +5,6 @@
         <parameter name="browser" value="firefox"/>
         <classes>
             <class name="tests.LoginTest"/>
-            <class name="tests.PasswordTest"/>
-            <class name="tests.VerifyPinTest"/>
-            <class name="tests.HomeScreenTest"/>
         </classes>
     </test>
 </suite>

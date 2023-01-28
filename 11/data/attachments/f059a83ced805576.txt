@@ -1,0 +1,1 @@
+verifyWhenEnteringAnySixCharacters failed and screenshot taken.

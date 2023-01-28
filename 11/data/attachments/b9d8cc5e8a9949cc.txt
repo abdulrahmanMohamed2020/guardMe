@@ -1,0 +1,1 @@
+verifyHomePageUrl failed and screenshot taken.

@@ -83,7 +83,8 @@ public class BasePage {
             element.clear();
             element.sendKeys(text);
         } catch (StaleElementReferenceException ex) {
-            findElement(locator).click();
+            findElement(locator).clear();
+            findElement(locator).sendKeys(text);
         }
     }
 

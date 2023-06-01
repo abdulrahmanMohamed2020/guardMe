@@ -1,0 +1,1 @@
+verifyThePinCode failed and screenshot taken.

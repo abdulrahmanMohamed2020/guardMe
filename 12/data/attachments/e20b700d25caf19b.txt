@@ -1,0 +1,1 @@
+verifyTheValidPassword failed and screenshot taken.

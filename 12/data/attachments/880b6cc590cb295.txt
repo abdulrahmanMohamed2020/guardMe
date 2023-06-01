@@ -1,0 +1,1 @@
+loginWithInvalidEmailFormat failed and screenshot taken.

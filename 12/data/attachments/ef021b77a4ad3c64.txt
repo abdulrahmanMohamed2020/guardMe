@@ -1,0 +1,1 @@
+verifyForgotPassword failed and screenshot taken.

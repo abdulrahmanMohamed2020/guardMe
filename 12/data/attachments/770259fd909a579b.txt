@@ -1,0 +1,1 @@
+verifyHamburgerIcon failed and screenshot taken.

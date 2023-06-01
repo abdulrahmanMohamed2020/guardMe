@@ -1,0 +1,1 @@
+verifyInvoiceAndPaymentsUrl failed and screenshot taken.

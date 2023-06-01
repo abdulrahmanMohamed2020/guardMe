@@ -1,0 +1,1 @@
+verifyGoBackButton failed and screenshot taken.

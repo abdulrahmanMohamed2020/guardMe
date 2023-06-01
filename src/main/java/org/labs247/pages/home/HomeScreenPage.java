@@ -7,14 +7,14 @@ import org.openqa.selenium.WebDriver;
 
 public class HomeScreenPage extends BasePage {
 
-    private final By salutationMessage = By.xpath("//h1[contains(text(),'Good morning, ')]");
+    private final By salutationMessage = By.xpath("//h1[contains(text(),'Hello, ')]");
     private final By orderPoliciesButton = By.xpath("//h3[contains(text(),'Order Policies')]//parent::div");
     private final By managePoliciesButton = By.xpath("//h3[contains(text(),'Manage Policies')]//parent::div");
     private final By invoicesPaymentsButton = By.xpath("//h3[contains(text(),'Invoices/Payments')]//parent::div");
-    private final By manageUsersButton = By.xpath("//h3[contains(text(),'Manage Users')]//parent::div");
-    private final By myGuardMeDocumentsButton = By.xpath("//h3[contains(text(),'My Guard.me Documents')]//parent::div");
-    private final By accountSettingsButton = By.xpath("//h3[contains(text(),'Account Settings')]//parent::div");
-    private final By orderNewPolicyMenu = By.xpath("//span[contains(text(),'Order New Policy')]//parent::div");
+    private final By manageUsersButton = By.xpath("//h3[contains(text(),'Account Users')]//parent::div");
+    private final By myGuardMeDocumentsButton = By.xpath("//h3[contains(text(),'Account Documents')]//parent::div");
+    private final By accountSettingsButton = By.xpath("//h3[contains(text(),'Account Details')]//parent::div");
+    private final By orderNewPolicyMenu = By.xpath("//span[contains(text(),'Order Policies')]//parent::div");
     private final By newPolicyDropDown = By.xpath("//parent::div//input[contains(@required,'required')]");
     private final By newPolicyDropDownValue = By.xpath("//div[contains(@class,'v-select__selections')]//following-sibling::input[contains(@required,'required')]//parent::div//child::div");
     private static final String NEW_POLICY_PRODUCTS_STR ="//div[text()='@val']";

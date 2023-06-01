@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class DocumentsPage extends BasePage {
 
-    private final By documentsPageTitle = By.xpath("//h2[text()='Guard.me Documents']");
+    private final By documentsPageTitle = By.xpath("//h2[text()='guard.me Documents']");
 
     public DocumentsPage(WebDriver driver) {
         super(driver);

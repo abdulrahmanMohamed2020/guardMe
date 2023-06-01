@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 
+
 import java.time.Duration;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class BasePage {
 
     protected WebDriver driver;
     private WebDriverWait driverWait;
-    private static final Duration TIMEOUT = Duration.ofSeconds(30);
+    private static final Duration TIMEOUT = Duration.ofSeconds(20);
     private static final Duration POLLING_TIMEOUT = Duration.ofMillis(200);
 
     public BasePage(WebDriver driver) {
@@ -19,25 +20,22 @@ public class BasePage {
         driverWait = new WebDriverWait(driver, TIMEOUT);
     }
 
-    protected WebElement findElement(By locator) {
-        Wait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(TIMEOUT)
-                .pollingEvery(POLLING_TIMEOUT)
-                .ignoring(StaleElementReferenceException.class)
-                .ignoring(NoSuchElementException.class);
+    public BasePage(WebDriver driver, Duration timeout) {
+        this.driver = driver;
+        this.driverWait = new WebDriverWait(driver, timeout);
+    }
+
+    public WebElement findElement(By locator) {
+        Wait<WebDriver> wait = getFluentWait();
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
-    protected List<WebElement> findElements(By locator) {
-        Wait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(TIMEOUT)
-                .pollingEvery(POLLING_TIMEOUT)
-                .ignoring(StaleElementReferenceException.class)
-                .ignoring(NoSuchElementException.class);
+    public List<WebElement> findElements(By locator) {
+        Wait<WebDriver> wait = getFluentWait();
         return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
     }
 
-    protected boolean elementVisible(By locator) {
+    public boolean elementVisible(By locator) {
         boolean flag;
         try {
             WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
@@ -49,7 +47,7 @@ public class BasePage {
         return flag;
     }
 
-    protected boolean elementClickable(By locator) {
+    public boolean elementClickable(By locator) {
         boolean flag;
         try {
             WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
@@ -66,7 +64,6 @@ public class BasePage {
         scrollToElement(element);
 
         driverWait.until(ExpectedConditions.elementToBeClickable(element));
-        driverWait.until(ExpectedConditions.visibilityOf(element));
         try {
             element.click();
         } catch (StaleElementReferenceException ex) {
@@ -89,15 +86,27 @@ public class BasePage {
     }
 
     public void selectItem(String item, By dropDown) {
+
+        WebElement dropDownElement = findElement(dropDown);
+        driverWait.until(ExpectedConditions.visibilityOf(dropDownElement));
+
         Select select = new Select(findElement(dropDown));
         select.selectByVisibleText(item);
     }
 
-    private void scrollToElement(WebElement element) {
+    protected void scrollToElement(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 
         Actions actions = new Actions(driver);
         actions.moveToElement(element);
         actions.perform();
+    }
+
+    private Wait<WebDriver> getFluentWait() {
+        return new FluentWait<>(driver)
+                .withTimeout(TIMEOUT)
+                .pollingEvery(POLLING_TIMEOUT)
+                .ignoring(StaleElementReferenceException.class)
+                .ignoring(NoSuchElementException.class);
     }
 }

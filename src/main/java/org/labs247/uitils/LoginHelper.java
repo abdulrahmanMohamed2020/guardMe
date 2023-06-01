@@ -1,4 +1,4 @@
-package uitils;
+package org.labs247.uitils;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class LoginHelper {
 
-    public static String token;
+    private static String token;
 
     public static void loginWithEmail(WebDriver driver) {
         LoginPage loginPage = new LoginPage(driver);
@@ -29,12 +29,12 @@ public class LoginHelper {
     public static void loginToApplicationApi() {
         Response response = RestAssured.given()
                 .contentType(ContentType.JSON)
-                .body(gerUserDataParams())
-                .post("https://api.guardme.247demo.ca/api/school/auth/sign-in");
+                .body(getUserDataParams())
+                .post("https://api-testing-internal.guardme-jarvis.dev/api/school/auth/sign-in");
 
         token = response.body().jsonPath().getString("data.token");
     }
-    private static Map<String,String> gerUserDataParams() {
+    private static Map<String,String> getUserDataParams() {
 
         Map<String,String> userDataMap = new HashMap<>();
         userDataMap.put("email", Constants.VALID_EMAIL);

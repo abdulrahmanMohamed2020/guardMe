@@ -3,17 +3,17 @@ package tests;
 import org.labs247.pages.onboarding.PasswordPage;
 import org.labs247.pages.onboarding.VerifyPinPage;
 import org.testng.annotations.Test;
-import uitils.Constants;
-import uitils.LoginHelper;
+import org.labs247.uitils.Constants;
+import org.labs247.uitils.LoginHelper;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class VerifyPinTest extends BaseTest{
+public class VerifyPinTest extends BaseTestSetup {
 
     private VerifyPinPage verifyPinPage;
 
-    @Test(description = "Verify the user is redirected to the Password page when entering valid Pin Code")
+    @Test(description = "Verify the user is redirected to the Password page when entering a valid Pin Code")
     public void verifyThePinCode() {
         LoginHelper.loginWithEmail(getDriver());
 
@@ -24,7 +24,7 @@ public class VerifyPinTest extends BaseTest{
 
         String pinPageTitle = new PasswordPage(getDriver()).getPageTitleMessage();
         assertEquals(pinPageTitle,"Enter Password");
-        assertEquals(getDriver().getCurrentUrl(),"https://school.guardme.247demo.ca/auth/login-pwd");
+        assertEquals(getDriver().getCurrentUrl(),"https://school.testing-internal.guardme-jarvis.dev/auth/login-pwd");
     }
 
     @Test(description = "Verify that the email of the user displayed correctly if user used email method to login")
@@ -33,10 +33,10 @@ public class VerifyPinTest extends BaseTest{
 
         verifyPinPage = new VerifyPinPage(getDriver());
 
-        assertTrue(verifyPinPage.getPageSubTitleMessage().contains(Constants.VALID_EMAIL),"The user email is not displayed correctly");
+        assertEquals(verifyPinPage.getPageSubTitleMessage(),Constants.VALID_EMAIL,"The user email is not displayed correctly");
     }
 
-    @Test(description = "Verify that the pin code input fields accept valid code digits")
+    @Test(description = "Verify that the pin code input fields accept valid format code digits")
     public void verifyWhenEnteringAnySixCharacters() {
         LoginHelper.loginWithEmail(getDriver());
 
@@ -45,7 +45,7 @@ public class VerifyPinTest extends BaseTest{
         verifyPinPage.enterSixPinCode(Constants.INVALID_PIN_CODE);
         verifyPinPage.clickOnVerifyPinButton();
 
-        assertEquals(verifyPinPage.getErrorMessage(),"Pin must be 6 digit number");
+        assertEquals(verifyPinPage.getErrorMessage(),"One time pin is incorrect.");
     }
 
     @Test(description = "Verify the error message when entering incorrect pin code")
@@ -76,6 +76,6 @@ public class VerifyPinTest extends BaseTest{
         verifyPinPage = new VerifyPinPage(getDriver());
         verifyPinPage.clickOnGoBackButton();
 
-        assertEquals(getDriver().getCurrentUrl(),"https://school.guardme.247demo.ca/auth/login");
+        assertEquals(getDriver().getCurrentUrl(),"https://school.testing-internal.guardme-jarvis.dev/auth/login");
     }
 }

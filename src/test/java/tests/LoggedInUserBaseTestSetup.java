@@ -4,34 +4,33 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
-import uitils.LoginHelper;
-import uitils.TestListener;
+import org.labs247.uitils.LoginHelper;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-@Listeners({TestListener.class})
-public class LoggedInUserBaseTest extends BaseTest {
+@Listeners({TestListenerSetup.class})
+public class LoggedInUserBaseTestSetup extends BaseTestSetup {
 
     @Parameters(value={"browser"})
     @BeforeMethod(description = "initialize the web drive", alwaysRun = true)
     @Override
     public void setUp (@Optional("firefox") String browser) throws MalformedURLException {
         LoginHelper.loginToApplicationApi();
-        driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilityFactory.getCapabilities(browser)));
+        driverThreadLocal.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilityFactory.getCapabilities(browser)));
 
-        Cookie cookie = new Cookie(
-                "auth._token.school","Bearer%20"+LoginHelper.getToken().substring(0,2)+
-                "%7C"+LoginHelper.getToken().substring(3));
+        String[] tokenSplitter = LoginHelper.getToken().split("\\|");
 
-        driver.get().get(BASE_URL);
-        driver.get().manage().addCookie(cookie);
-        driver.get().get(BASE_URL);
+        Cookie cookie = new Cookie("auth._token.school","Bearer%20"+tokenSplitter[0]+"%7C"+tokenSplitter[1]);
+
+        driverThreadLocal.get().get(BASE_URL);
+        driverThreadLocal.get().manage().addCookie(cookie);
+        driverThreadLocal.get().get(BASE_URL);
     }
 
     @Override
     public WebDriver getDriver(){
-        return driver.get();
+        return driverThreadLocal.get();
     }
 
     @AfterMethod(description = "close the web drive", alwaysRun = true)

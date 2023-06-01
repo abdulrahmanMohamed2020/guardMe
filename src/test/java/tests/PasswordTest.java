@@ -3,13 +3,13 @@ package tests;
 import org.labs247.pages.home.HomeScreenPage;
 import org.labs247.pages.onboarding.PasswordPage;
 import org.testng.annotations.Test;
-import uitils.Constants;
-import uitils.LoginHelper;
+import org.labs247.uitils.Constants;
+import org.labs247.uitils.LoginHelper;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class PasswordTest extends BaseTest{
+public class PasswordTest extends BaseTestSetup {
 
     private PasswordPage passwordPage;
 
@@ -24,7 +24,7 @@ public class PasswordTest extends BaseTest{
         passwordPage.clickOnContinue();
 
         assertTrue(new HomeScreenPage(getDriver()).isSalutationMessageVisible(),"The Salutation Message is not visible");
-        assertEquals(getDriver().getCurrentUrl(),"https://school.guardme.247demo.ca/home");
+        assertEquals(getDriver().getCurrentUrl(),"https://school.testing-internal.guardme-jarvis.dev/home");
     }
 
     @Test(description = "Verify the error message when entering password with a few than 8 characters")
@@ -37,7 +37,7 @@ public class PasswordTest extends BaseTest{
         passwordPage.enterPassword(Constants.INVALID_PASSWORD_LENGTH);
         passwordPage.clickOnContinue();
 
-        assertEquals(passwordPage.getErrorMessage(), "The password must be at least 8 characters.");
+        assertEquals(passwordPage.getErrorMessage(), "Password must contain at least 8 characters.");
     }
 
     @Test(description = "Verify the error message when entering invalid password")
@@ -50,7 +50,7 @@ public class PasswordTest extends BaseTest{
         passwordPage.enterPassword(Constants.INVALID_PASSWORD);
         passwordPage.clickOnContinue();
 
-        assertEquals(passwordPage.getErrorMessage(), "The provided password is invalid.");
+        assertEquals(passwordPage.getErrorMessage(), "Password must contain at least 1 special charcter.");
     }
 
     @Test(description = "Verify the error message when entering incorrect password")
@@ -62,6 +62,12 @@ public class PasswordTest extends BaseTest{
 
         passwordPage.enterPassword(Constants.INCORRECT_PASSWORD);
         passwordPage.clickOnContinue();
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         assertEquals(passwordPage.getErrorMessage(), "The provided password is invalid.","The error message is incorrect or not displayed");
     }
@@ -100,7 +106,7 @@ public class PasswordTest extends BaseTest{
 
         new PasswordPage(getDriver()).clickOnForgotPassword();
 
-        assertEquals(getDriver().getCurrentUrl(),"https://school.guardme.247demo.ca/auth/forgot-password");
+        assertEquals(getDriver().getCurrentUrl(),"https://school.testing-internal.guardme-jarvis.dev/auth/forgot-password");
     }
 
     @Test(description = "Verify the user is redirected to the Password page when clicking on I remember my password button")
@@ -113,6 +119,6 @@ public class PasswordTest extends BaseTest{
         passwordPage.clickOnForgotPassword();
         passwordPage.clickOnIRememberMyPassword();
 
-        assertEquals(getDriver().getCurrentUrl(),"https://school.guardme.247demo.ca/auth/login-pwd");
+        assertEquals(getDriver().getCurrentUrl(),"https://school.testing-internal.guardme-jarvis.dev/auth/login-pwd");
     }
 }

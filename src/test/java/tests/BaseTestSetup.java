@@ -4,32 +4,36 @@ import org.labs247.core.CapabilityFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
-import uitils.TestListener;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-@Listeners({TestListener.class})
-public class BaseTest {
+@Listeners({TestListenerSetup.class})
+public class BaseTestSetup {
 
-    protected static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<>();
-    protected final String BASE_URL = "https://school.guardme.247demo.ca";
+    protected static ThreadLocal<RemoteWebDriver> driverThreadLocal = new ThreadLocal<>();
+    protected final String BASE_URL = "https://school.testing-internal.guardme-jarvis.dev/";
 
     public CapabilityFactory capabilityFactory = new CapabilityFactory();
 
     @Parameters(value={"browser"})
     @BeforeMethod(description = "initialize the web drive", alwaysRun = true)
     public void setUp (@Optional("firefox") String browser) throws MalformedURLException {
-        driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilityFactory.getCapabilities(browser)));
-        driver.get().get(BASE_URL);
+        RemoteWebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilityFactory.getCapabilities(browser));
+        driver.get(BASE_URL);
+        driverThreadLocal.set(driver);
     }
 
     public WebDriver getDriver(){
-        return driver.get();
+        return driverThreadLocal.get();
     }
 
     @AfterMethod(description = "close the web drive", alwaysRun = true)
     public void tearDown() {
-        getDriver().quit();
+        WebDriver driver = getDriver();
+        if (driver != null) {
+            driver.quit();
+            driverThreadLocal.remove();
+        }
     }
 }

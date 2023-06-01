@@ -1,4 +1,4 @@
-package uitils;
+package tests;
 
 import io.qameta.allure.Attachment;
 import org.apache.commons.io.FileUtils;
@@ -7,14 +7,13 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import tests.BaseTest;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class TestListener extends BaseTest implements ITestListener {
+public class TestListenerSetup extends BaseTestSetup implements ITestListener {
 
     @Attachment(value = "Screenshot", type = "image/png")
     private static byte[] takeScreenShotForAllure(WebDriver webDriver) {
@@ -40,8 +39,8 @@ public class TestListener extends BaseTest implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        TestListener.takeScreenShotForAllure(getDriver());
-        //TestListener.saveScreenShot(getDriver(),result);
-        TestListener.saveTextLog(result.getMethod().getMethodName() + " failed and screenshot taken.");
+        takeScreenShotForAllure(getDriver());
+        saveTextLog(result.getMethod().getMethodName() + " failed and screenshot taken.");
+        //TestListenerSetup.saveScreenShot(getDriver(),result);
     }
 }

@@ -17,8 +17,8 @@ public class VerifyPinPage extends BasePage {
     private final By resendPinButton = By.xpath("//span[contains(text(),'Resend Pin')]//parent::button[@type='button']");
     private final By goBackButton = By.xpath("//span[contains(text(),'Go back')]//parent::button[@type='button']");
     private final By pageTitle = By.xpath("//div[contains(text(),'Verify your pin code')]");
-    private final By pageSubTitle = By.xpath("//div[contains(text(),'6 digit')]");
-    private final By errorMessage = By.xpath("//p[contains(translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'pin')]");
+    private final By pageSubTitle = By.xpath("//span[contains(text(),'@')]");
+    private final By errorMessage = By.xpath("//div[contains(@class,'v-messages__message')]");
 
     public VerifyPinPage(WebDriver driver) {
         super(driver);

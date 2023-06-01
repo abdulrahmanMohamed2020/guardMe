@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="All Test Suites">
-    <test name="Guard Me Smoke Test Suite" parallel="classes" thread-count="2">
+    <test name="Guard Me Smoke Test Suite" parallel="methods" thread-count="2">
         <parameter name="browser" value="firefox"/>
         <classes>
             <class name="tests.LoginTest"/>
+            <class name="tests.VerifyPinTest"/>
+            <class name="tests.PasswordTest"/>
+            <class name="tests.HomeScreenTest"/>
         </classes>
     </test>
 </suite>
